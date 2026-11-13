@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Fastx" />
+  <link rel="manifest" href="manifest.json" />
+  <title>Fastx</title>
+  <style>
+    :root {
+      --bg: #ffffff; --pill: #eef2f7; --surface: #f8f9fa; --text: #1f1f1f;
+      --muted: #5f6368; --border: #e0e3e7; --link: #1a0dab; --blue: #1a73e8;
+      --blue-soft: #d3e3fd; --blue-text: #041e49;
+      --ai-grad: linear-gradient(135deg, #4285f4, #9b72cb, #d96570);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0; padding: 0; width: 100%; overflow-x: hidden;
+      font-family: "Google Sans", Roboto, Arial, system-ui, -apple-system, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.48;
+    }
+    body { padding-bottom: 74px; }
+    @media (min-width: 768px) { body { padding-bottom: 24px; } }
+    .screen { display: none; width: 100%; }
+    .screen.active { display: block; }
+
+    /* Top Header */
+    .app-header {
+      display: flex; align-items: center; justify-content: space-between; padding: 12px 18px;
+      position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); z-index: 30;
+    }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .icon-btn {
+      background: none; border: none; padding: 6px; border-radius: 50%; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; color: #444746;
+    }
+    .icon-btn:hover { background: var(--surface); }
+    .desktop-nav { display: none; gap: 6px; align-items: center; }
+    .d-nav-btn {
+      border: none; background: transparent; padding: 7px 14px; border-radius: 20px;
+      font-size: 0.88rem; color: var(--muted); cursor: pointer; font-weight: 500;
+    }
+    .d-nav-btn:hover { background: var(--surface); color: var(--text); }
+    .d-nav-btn.active { background: var(--blue-soft); color: var(--blue-text); font-weight: 600; }
+    @media (min-width: 768px) { .desktop-nav { display: flex; } }
+    .avatar {
+      width: 34px; height: 34px; border-radius: 50%; background: #9c2758; color: #fff;
+      font-weight: 600; font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none;
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 2.85rem; font-weight: 700; letter-spacing: -1.6px; text-align: center;
+      margin: 6px 0 18px; user-select: none; cursor: pointer;
+    }
+    .logo .b { color: #4285F4; } .logo .r { color: #EA4335; } .logo .y { color: #FBBC05; } .logo .g { color: #34A853; }
+    @media (min-width: 768px) { .logo { font-size: 3.6rem; margin-top: 24px; } }
+
+    /* Home Search & Autocomplete */
+    .home-main { max-width: 720px; margin: 0 auto; padding: 0 16px; width: 100%; }
+    .search-wrap { position: relative; width: 100%; }
+    .pill-search {
+      display: flex; align-items: center; background: var(--pill); border-radius: 36px;
+      padding: 8px 14px 8px 20px; height: 56px; gap: 8px; width: 100%;
+    }
+    .pill-search:focus-within { background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.12); border: 1px solid var(--border); }
+    .pill-search input { flex: 1; border: none; outline: none; background: transparent; font-size: 1.08rem; color: var(--text); min-width: 0; }
+    .ac-box {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #fff; border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.14); border: 1px solid var(--border); z-index: 60; display: none; overflow: hidden;
+    }
+    .ac-row { display: flex; align-items: center; padding: 11px 18px; cursor: pointer; font-size: 0.95rem; }
+    .ac-row:hover { background: var(--surface); }
+    .ac-row span.sub { margin-left: auto; font-size: 0.74rem; color: var(--muted); }
+
+    /* Action Pills */
+    .action-pills { display: flex; gap: 10px; margin-top: 14px; justify-content: center; width: 100%; }
+    .act-pill {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #f1f4f9;
+      border: none; border-radius: 28px; height: 46px; padding: 0 20px; font-size: 0.94rem; font-weight: 500; color: #1f1f1f; cursor: pointer;
+    }
+    .act-pill.wide { flex: 1.4; max-width: 210px; } .act-pill.sq { flex: 1; max-width: 130px; }
+    .act-pill:hover { background: #e4eaf3; }
+
+    /* Horizontal Strip */
+    .cards-strip { display: flex; gap: 10px; overflow-x: auto; padding: 18px 2px 8px; scrollbar-width: none; width: 100%; }
+    .cards-strip::-webkit-scrollbar { display: none; }
+    .mini-card {
+      min-width: 168px; border: 1px solid var(--border); border-radius: 16px;
+      padding: 11px 13px; background: #fff; cursor: pointer; flex-shrink: 0;
+    }
+    .mini-card:hover { background: var(--surface); }
+    .mini-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; }
+    .mini-badge { background: #f1f3f4; color: #3c4043; padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 500; }
+    .mini-badge.live { background: #e6f4ea; color: #137333; }
+    .mini-title { font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mini-sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+    /* Discover Feed */
+    .discover-head { display: flex; justify-content: space-between; margin: 14px 0 10px; font-size: 0.84rem; color: var(--muted); }
+    .discover-grid { display: grid; grid-template-columns: 1fr; gap: 18px; width: 100%; }
+    @media (min-width: 768px) { .discover-grid { grid-template-columns: 1fr 1fr; } }
+    .feed-card { border-bottom: 1px solid #f1f3f4; padding-bottom: 16px; cursor: pointer; width: 100%; }
+    @media (min-width: 768px) {
+      .feed-card { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; padding-bottom: 14px; }
+      .feed-card .feed-body { padding: 0 14px; }
+    }
+    .feed-img { width: 100%; height: 200px; object-fit: cover; border-radius: 14px; background: #eef2f7; display: block; }
+    @media (min-width: 768px) { .feed-img { border-radius: 0; height: 175px; } }
+    .feed-title { font-size: 1.06rem; font-weight: 500; margin: 10px 0 6px; line-height: 1.35; }
+    .feed-meta { display: flex; gap: 8px; font-size: 0.78rem; color: var(--muted); }
+
+    /* SERP (Google Results Screen - Bug-Free) */
+    .serp-header { border-bottom: 1px solid var(--border); background: #fff; padding: 12px 16px 0; position: sticky; top: 0; z-index: 35; }
+    .serp-top { display: flex; align-items: center; gap: 14px; max-width: 1220px; margin: 0 auto; width: 100%; }
+    .serp-logo { font-size: 1.55rem; font-weight: 700; letter-spacing: -1px; cursor: pointer; flex-shrink: 0; }
+    .serp-logo .b { color: #4285F4; } .serp-logo .r { color: #EA4335; } .serp-logo .y { color: #FBBC05; } .serp-logo .g { color: #34A853; }
+    .serp-searchbar {
+      flex: 1; max-width: 680px; display: flex; align-items: center; background: #fff;
+      border: 1px solid var(--border); border-radius: 26px; padding: 6px 14px; box-shadow: 0 1px 5px rgba(32,33,36,0.1); gap: 8px; min-width: 0;
+    }
+    .serp-searchbar input { flex: 1; border: none; outline: none; font-size: 0.98rem; min-width: 0; }
+    .serp-tabs { display: flex; gap: 20px; max-width: 1220px; margin: 10px auto 0; padding-left: 88px; overflow-x: auto; scrollbar-width: none; }
+    .serp-tabs::-webkit-scrollbar { display: none; }
+    @media (max-width: 767px) { .serp-tabs { padding-left: 4px; gap: 16px; } }
+    .stab { padding: 8px 2px 10px; font-size: 0.88rem; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; font-weight: 500; }
+    .stab.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; }
+
+    .serp-body {
+      max-width: 1220px; margin: 0 auto; padding: 16px; width: 100%;
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: 40px;
+    }
+    .serp-body.full-grid { grid-template-columns: 1fr; }
+    @media (max-width: 960px) { .serp-body { grid-template-columns: 1fr; gap: 20px; } }
+    .serp-main-col { min-width: 0; width: 100%; }
+
+    .lang-pill-info { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .lang-chip { background: #eef2f7; color: #1f1f1f; padding: 2px 9px; border-radius: 12px; font-size: 0.76rem; font-weight: 500; }
+
+    /* Instant Widgets */
+    .widget-card { border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; margin-bottom: 22px; background: #fff; box-shadow: 0 1px 6px rgba(32,33,36,0.06); width: 100%; min-width: 0; }
+    .w-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .w-big { font-size: 2.3rem; font-weight: 600; line-height: 1.1; }
+    .w-sub { font-size: 0.84rem; color: var(--muted); margin-top: 4px; }
+    .curr-row { display: flex; gap: 8px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+    .curr-row input { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; font-size: 0.95rem; }
+    .dict-pos { font-style: italic; color: var(--blue); font-size: 0.85rem; font-weight: 600; margin: 10px 0 4px; }
+    .dict-audio { border: 1px solid var(--border); background: var(--surface); border-radius: 18px; padding: 4px 12px; font-size: 0.78rem; cursor: pointer; }
+
+    /* Results (Text Wrap & Overflow Fixed!) */
+    .g-result { margin-bottom: 24px; display: flex; gap: 14px; justify-content: space-between; align-items: flex-start; width: 100%; min-width: 0; }
+    .g-res-main { flex: 1; min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+    .g-res-thumb { width: 88px; height: 88px; object-fit: cover; border-radius: 10px; flex-shrink: 0; border: 1px solid var(--border); cursor: pointer; }
+    .g-site-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; min-width: 0; }
+    .g-favicon { width: 26px; height: 26px; border-radius: 50%; background: #f1f3f4; border: 1px solid #e8eaed; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; color: #3c4043; flex-shrink: 0; }
+    .g-site-name { font-size: 0.88rem; color: #202124; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .g-url { font-size: 0.76rem; color: #4d5156; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    .g-title { display: inline-block; font-size: 1.2rem; color: var(--link); text-decoration: none; margin: 2px 0 4px; overflow-wrap: anywhere; word-break: break-word; }
+    .g-title:hover { text-decoration: underline; }
+    .g-desc { margin: 0; font-size: 0.88rem; color: #4d5156; overflow-wrap: anywhere; word-break: break-word; }
+
+    .load-more-btn {
+      width: 100%; max-width: 320px; display: block; margin: 18px auto; padding: 12px 20px;
+      border: 1px solid var(--border); border-radius: 24px; background: var(--surface);
+      font-size: 0.92rem; font-weight: 600; cursor: pointer; text-align: center; color: var(--blue);
+    }
+    .load-more-btn:hover { background: #e8eaed; }
+
+    /* Images */
+    .img-strip { display: flex; gap: 8px; overflow-x: auto; margin: 0 0 22px; padding-bottom: 4px; scrollbar-width: none; width: 100%; }
+    .img-strip::-webkit-scrollbar { display: none; }
+    .img-strip-card { width: 145px; flex-shrink: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; background: #fff; }
+    .img-strip-card img { width: 145px; height: 110px; object-fit: cover; display: block; background: #eef2f7; }
+    .img-strip-cap { padding: 5px 8px; font-size: 0.74rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .images-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; width: 100%; }
+    .img-grid-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; background: #fff; }
+    .img-grid-card img { width: 100%; height: 155px; object-fit: cover; display: block; background: #eef2f7; }
+    .img-grid-meta { padding: 8px 10px; }
+    .img-grid-title { font-size: 0.82rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .img-grid-src { font-size: 0.72rem; color: var(--muted); }
+
+    /* Knowledge Panel */
+    .kp-panel { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: #fff; height: fit-content; width: 100%; }
+    .kp-photo { width: 100%; max-height: 220px; object-fit: cover; display: block; cursor: pointer; }
+    .kp-inner { padding: 16px; }
+    .kp-h { font-size: 1.4rem; font-weight: 500; margin: 0 0 4px; }
+    .kp-sub { font-size: 0.84rem; color: var(--muted); margin-bottom: 10px; }
+    .kp-p { font-size: 0.9rem; color: #3c4043; margin: 0 0 12px; }
+    .kp-langs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .kp-lbtn { border: 1px solid var(--border); background: var(--surface); border-radius: 14px; padding: 4px 10px; font-size: 0.75rem; cursor: pointer; }
+    .kp-lbtn.active { background: var(--blue-soft); color: var(--blue-text); border-color: #a8c7fa; font-weight: 600; }
+
+    /* AI Mode */
+    .ai-wrap { max-width: 820px; margin: 0 auto; padding: 16px 16px 48px; width: 100%; }
+    .ai-header-badge { display: inline-flex; align-items: center; gap: 8px; background: #f0f4f9; padding: 6px 14px; border-radius: 20px; font-size: 0.84rem; font-weight: 600; margin-bottom: 14px; }
+    .direct-ans-box { background: #fff; border: 1.5px solid #a8c7fa; border-radius: 18px; padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(26,115,232,0.08); width: 100%; }
+    .da-tag { font-size: 0.75rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .da-main { font-size: 1.16rem; font-weight: 500; color: #111; line-height: 1.5; margin: 0 0 8px; }
+    .da-sub { font-size: 0.82rem; color: var(--muted); }
+    .ai-card { background: linear-gradient(180deg, #f5f8ff 0%, #ffffff 100%); border: 1px solid #d3e3fd; border-radius: 20px; padding: 20px; margin-bottom: 18px; width: 100%; }
+    .ai-answer { font-size: 0.98rem; color: #1f1f1f; line-height: 1.65; }
+    .ai-sources { display: flex; gap: 10px; overflow-x: auto; margin-top: 16px; padding-bottom: 4px; width: 100%; }
+    .ai-src-card { min-width: 205px; max-width: 235px; border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; background: #fff; text-decoration: none; color: inherit; flex-shrink: 0; }
+    .ai-src-title { font-size: 0.84rem; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ai-src-site { font-size: 0.73rem; color: var(--muted); }
+
+    /* Legal Footer & Attributions */
+    .legal-footer {
+      max-width: 1220px; margin: 30px auto 10px; padding: 14px 16px;
+      font-size: 0.76rem; color: var(--muted); border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .legal-footer a { color: var(--muted); text-decoration: underline; cursor: pointer; }
+
+    /* Modals, Lightbox & Bottom Nav */
+    .page-wrap { max-width: 720px; margin: 0 auto; padding: 14px 16px; width: 100%; }
+    .page-title { font-size: 1.35rem; font-weight: 600; margin: 4px 0 14px; display: flex; justify-content: space-between; align-items: center; }
+    .list-card { border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer; width: 100%; }
+    .list-card:hover { background: var(--surface); }
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 100; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 95vw; max-height: 75vh; border-radius: 12px; object-fit: contain; }
+    .lightbox-cap { color: #fff; margin-top: 12px; text-align: center; font-size: 0.95rem; }
+    .lightbox-actions { margin-top: 12px; display: flex; gap: 12px; }
+    .lb-btn { padding: 8px 16px; border-radius: 20px; border: none; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; height: 66px; background: #f3f6fc; border-top: 1px solid #e3e7ee;
+      display: flex; justify-content: space-around; align-items: center; z-index: 50;
+    }
+    @media (min-width: 768px) { .bottom-nav { display: none; } }
+    .bnav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: none; background: none; color: #444746; font-size: 0.74rem; font-weight: 500; cursor: pointer; width: 76px; }
+    .bnav-pill { width: 56px; height: 30px; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+    .bnav-item.active .bnav-pill { background: var(--blue-soft); color: var(--blue); }
+    .bnav-item.active { color: var(--blue); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header class="app-header" id="mainHeader">
+    <div class="header-left">
+      <button class="icon-btn" title="Notifications & Index Status" onclick="switchScreen('notifications')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h14v2H3V6zm0 5h11v2H3v-2zm0 5h11v2H3v-2zm16.5-3.5L21 14l1.5-1.5L24 14l-1.5 1.5L24 17l-1.5 1.5L21 17l-1.5 1.5L18 17l1.5-1.5L18 14l1.5-1.5z"/></svg>
+      </button>
+      <nav class="desktop-nav">
+        <button class="d-nav-btn active" data-nav="home" onclick="switchScreen('home')">Home</button>
+        <button class="d-nav-btn" data-nav="search" onclick="switchScreen('search')">Search</button>
+        <button class="d-nav-btn" data-nav="aimode" onclick="openAIMode(currentQuery || 'Who invented the telephone')">AI Mode</button>
+        <button class="d-nav-btn" data-nav="notifications" onclick="switchScreen('notifications')">Notifications</button>
+        <button class="d-nav-btn" data-nav="activity" onclick="switchScreen('activity')">Activity</button>
+      </nav>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button id="installBtn" class="d-nav-btn" style="display:none; background:#e8f0fe; color:#1967d2;" onclick="installPWA()">Install App</button>
+      <div class="avatar" title="Fastx Account" onclick="switchScreen('activity')">S</div>
+    </div>
+  </header>
+
+  <!-- SCREEN 1: HOME -->
+  <section class="screen active" id="screen-home">
+    <div class="home-main">
+      <div class="logo" onclick="switchScreen('home')"><span class="b">F</span><span class="r">a</span><span class="y">s</span><span class="b">t</span><span class="g">x</span></div>
+
+      <div class="search-wrap">
+        <form class="pill-search" onsubmit="handleSearchSubmit(event, 'homeInput')">
+          <input id="homeInput" type="text" placeholder="Search 49,540+ pages & Whole Wikipedia" autocomplete="off" oninput="onTypeAC('homeInput', 'homeAC')" />
+          <button type="button" class="icon-btn" title="Voice Search" onclick="startVoice('homeInput')"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/></svg></button>
+          <button type="button" class="icon-btn" title="Image Search" onclick="executeImageJump()"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2.17L15 3H9L7.17 5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v-2H5V7h14v5h2V7c0-1.1-.9-2-2-2zm-7 3c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm7 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></button>
+        </form>
+        <div class="ac-box" id="homeAC"></div>
+      </div>
+
+      <div class="action-pills">
+        <button class="act-pill wide" onclick="openAIMode(document.getElementById('homeInput').value || 'Who is Chhatrapati Shivaji Maharaj')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM19 2l1 2.5L22.5 5.5 20 6.5 19 9l-1-2.5L15.5 5.5 18 4.5 19 2z"/></svg>
+          AI Mode
+        </button>
+        <button class="act-pill sq" title="Voice Search" onclick="startVoice('homeInput')"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h2v-4H3zm4-3v10h2V7H7zm4-4v18h2V3h-2zm4 4v10h2V7h-2zm4 3v4h2v-4h-2z"/></svg></button>
+        <button class="act-pill sq" title="Factpedia Marathi" onclick="executeSearch('factpedia')"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 14H7v-2h8v2zm2-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></button>
+      </div>
+
+      <div class="cards-strip">
+        <div class="mini-card" onclick="executeSearch('Pune weather')">
+          <div class="mini-top"><span>Weather</span><span class="mini-badge live">Live</span></div>
+          <div class="mini-title">Pune Weather</div>
+          <div class="mini-sub" id="homeWeatherTemp">Tap for forecast</div>
+        </div>
+        <div class="mini-card" onclick="executeSearch('100 USD to INR')">
+          <div class="mini-top"><span>Currency</span><span class="mini-badge live">Rate</span></div>
+          <div class="mini-title">USD → INR</div>
+          <div class="mini-sub">Live Converter</div>
+        </div>
+        <div class="mini-card" onclick="executeSearch('Python')">
+          <div class="mini-top"><span>Fastx Shards</span><span class="mini-badge live" id="shardStatusBadge">Live</span></div>
+          <div class="mini-title" id="shardCountCard">49,540 Pages</div>
+          <div class="mini-sub">1,890 Websites</div>
+        </div>
+        <div class="mini-card" onclick="executeSearch('define algorithm')">
+          <div class="mini-top"><span>Dictionary</span><span class="mini-badge">Audio</span></div>
+          <div class="mini-title">Word Meanings</div>
+          <div class="mini-sub">Definitions & Audio</div>
+        </div>
+        <div class="mini-card" onclick="executeSearch('YouTube')">
+          <div class="mini-top"><span>Portals</span><span class="mini-badge">Fast</span></div>
+          <div class="mini-title">Google • YT • IG</div>
+          <div class="mini-sub">Popular Portals</div>
+        </div>
+      </div>
+
+      <div class="discover-head"><span>Discover • Live News & Featured Feed</span><span id="todayLabel"></span></div>
+      <div class="discover-grid" id="discoverFeed"></div>
+
+      <footer class="legal-footer">
+        <div>Fastx Search • Zero-Cost Hybrid Web Index</div>
+        <div>
+          <a onclick="showLegalModal()">About & DMCA / Remove URL</a> •
+          <span>Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a></span>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <!-- SCREEN 2: SEARCH RESULTS -->
+  <section class="screen" id="screen-search">
+    <div class="serp-header">
+      <div class="serp-top">
+        <div class="serp-logo" onclick="switchScreen('home')"><span class="b">F</span><span class="r">a</span><span class="y">s</span><span class="b">t</span><span class="g">x</span></div>
+        <div class="search-wrap" style="max-width:680px;">
+          <form class="serp-searchbar" onsubmit="handleSearchSubmit(event, 'serpInput')">
+            <input id="serpInput" type="text" placeholder="Search..." autocomplete="off" oninput="onTypeAC('serpInput', 'serpAC')" />
+            <button type="button" class="icon-btn" onclick="startVoice('serpInput')"><svg width="20" height="20" viewBox="0 0 24 24" fill="#4285F4"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/></svg></button>
+            <button type="submit" class="icon-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#4285F4"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></button>
+          </form>
+          <div class="ac-box" id="serpAC"></div>
+        </div>
+      </div>
+      <div class="serp-tabs">
+        <div class="stab active" data-tab="all" onclick="setSerpTab('all')">All</div>
+        <div class="stab" data-tab="aimode" onclick="openAIMode(currentQuery || 'Albert Einstein')">AI Mode</div>
+        <div class="stab" data-tab="images" onclick="setSerpTab('images')">Images</div>
+        <div class="stab" data-tab="wiki" onclick="setSerpTab('wiki')">Wikipedia</div>
+        <div class="stab" data-tab="shards" onclick="setSerpTab('shards')">Fastx Web Index</div>
+        <div class="stab" data-tab="research" onclick="setSerpTab('research')">Papers & Code</div>
+        <div class="stab" data-tab="social" onclick="setSerpTab('social')">Portals</div>
+      </div>
+    </div>
+
+    <div class="serp-body" id="serpBody">
+      <div class="serp-main-col">
+        <div class="lang-pill-info" id="serpMeta"></div>
+        <div id="instantWidgetArea"></div>
+        <div id="serpResults"></div>
+      </div>
+      <aside id="kpAside"><div class="kp-panel" id="kpPanel" style="display:none;"></div></aside>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: AI MODE -->
+  <section class="screen" id="screen-aimode">
+    <div class="ai-wrap">
+      <div class="ai-header-badge">
+        <span style="background:var(--ai-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">✦ Fastx AI Mode • Whole Wikipedia</span>
+        <span class="lang-chip" id="aiLangChip">Auto Language</span>
+      </div>
+      <form class="pill-search" style="margin-bottom:18px;" onsubmit="handleAISubmit(event)">
+        <input id="aiInput" type="text" placeholder="Ask anything in English, मराठी, हिन्दी..." autocomplete="off" />
+        <button type="button" class="icon-btn" onclick="startVoice('aiInput', true)"><svg width="20" height="20" viewBox="0 0 24 24" fill="#444746"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/></svg></button>
+        <button type="submit" class="icon-btn" style="background:var(--blue); color:#fff; width:38px; height:38px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+      </form>
+      <div id="aiDirectContainer"></div>
+      <div id="aiImagesContainer"></div>
+      <div class="ai-card" id="aiAnswerCard"><div style="color:var(--muted);">Ask any question for a Whole-Wikipedia Direct Answer + Live Photos.</div></div>
+    </div>
+  </section>
+
+  <!-- SCREEN 4 & 5: NOTIFICATIONS & ACTIVITY -->
+  <section class="screen" id="screen-notifications"><div class="page-wrap"><div class="page-title">Index & Status</div><div id="notifList"></div></div></section>
+  <section class="screen" id="screen-activity"><div class="page-wrap"><div class="page-title"><span>Search Activity</span><button class="d-nav-btn" style="background:#fce8e6; color:#c5221f;" onclick="clearHistory()">Clear all</button></div><div id="activityList"></div></div></section>
+
+  <!-- LEGAL & DMCA MODAL -->
+  <div class="lightbox" id="legalModal" onclick="closeLegalModal(event)">
+    <div style="background:#fff; border-radius:18px; max-width:560px; padding:24px; color:var(--text); max-height:85vh; overflow-y:auto;" onclick="event.stopPropagation()">
+      <h2 style="margin:0 0 10px;">About Fastx & Site Removal (DMCA)</h2>
+      <p style="font-size:0.88rem; color:#4d5156;">Fastx is an educational, zero-cost, serverless search engine. We do not host copyrighted web content—we only crawl publicly available titles and short snippets, directing users to original creators.</p>
+      <h4 style="margin:14px 0 6px;">Attributions & Data Sources:</h4>
+      <ul style="font-size:0.84rem; color:#4d5156; padding-left:18px;">
+        <li>Weather forecast data provided by <strong>Open-Meteo.com</strong> (Non-Commercial Educational License) [1.3.1, 1.3.4].</li>
+        <li>Encyclopedia summaries and thumbnail images via <strong>Wikimedia API</strong> (CC BY-SA 4.0 / Public Domain) [1.2.1, 1.2.2].</li>
+        <li>Academic literature via <strong>OpenAlex API</strong>.</li>
+      </ul>
+      <h4 style="margin:14px 0 6px;">Website Removal / Contact:</h4>
+      <p style="font-size:0.84rem; color:#4d5156;">If you are a webmaster and want your URL removed from our index, please email our GitHub repository or contact: <code>admin@fastx-search.pages.dev</code>. We honor all <code>robots.txt</code> and valid removal requests within 24 hours.</p>
+      <button class="lb-btn" style="background:var(--blue); color:#fff; width:100%; margin-top:14px;" onclick="closeLegalModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- IMAGE LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <img id="lbImg" src="" alt="" /><div class="lightbox-cap" id="lbCap"></div>
+    <div class="lightbox-actions">
+      <a id="lbSource" href="#" target="_blank" rel="noopener" class="lb-btn" style="background:#1a73e8; color:#fff; text-decoration:none;">Open Source ↗</a>
+      <button class="lb-btn" style="background:#fff; color:#111;" onclick="closeLightbox()">Close</button>
+    </div>
+  </div>
+
+  <!-- BOTTOM MOBILE NAV -->
+  <nav class="bottom-nav">
+    <button class="bnav-item active" data-bnav="home" onclick="switchScreen('home')"><div class="bnav-pill"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div><span>Home</span></button>
+    <button class="bnav-item" data-bnav="search" onclick="switchScreen('search')"><div class="bnav-pill"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div><span>Search</span></button>
+    <button class="bnav-item" data-bnav="notifications" onclick="switchScreen('notifications')"><div class="bnav-pill"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></div><span>Notifications</span></button>
+    <button class="bnav-item" data-bnav="activity" onclick="switchScreen('activity')"><div class="bnav-pill"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg></div><span>Activity</span></button>
+  </nav>
+
+  <script>
+    // =========================================================================
+    // 1. LIVE JSDELIVR CDN (shravan-info/fastx-data@v1)
+    // =========================================================================
+    const SHARD_CDN = "https://cdn.jsdelivr.net/gh/shravan-info/fastx-data@v1";
+
+    const SOCIAL_PORTALS = [
+      ["https://www.google.com", "Google", "Search the world's information, images, videos, and web services.", "google search", "G"],
+      ["https://www.youtube.com", "YouTube", "Watch and stream videos, music, shorts, and educational channels.", "youtube video music", "Y"],
+      ["https://www.instagram.com", "Instagram", "Share photos, Reels, Stories, and connect with creators.", "instagram reels photos", "I"],
+      ["https://factpedia-mr.pages.dev/", "Factpedia Marathi", "Free Marathi encyclopedia covering history, India, Maharashtra, and science.", "factpedia marathi india maharashtra", "F"],
+      ["https://maps.google.com", "Google Maps", "Find directions, real-time traffic, and local places.", "google maps navigation", "G"],
+      ["https://translate.google.com", "Google Translate", "Translate text across 100+ languages including Marathi & Hindi.", "google translate marathi hindi", "G"],
+      ["https://github.com", "GitHub", "Open-source software repositories and developer tools.", "github coding", "G"]
+    ];
+
+    const QUICK_SUGGESTIONS = [
+      "Maharashtra", "Factpedia", "Python documentation", "BBC Marathi", "Nature science", "Forbes", "Node.js",
+      "The Hindu", "ISRO Chandrayaan-3", "Chhatrapati Shivaji Maharaj", "Pune weather", "100 USD to INR", "define algorithm"
+    ];
+
+    const LANG_NAMES = {
+      en: "English", mr: "मराठी", hi: "हिन्दी", ta: "தமிழ்", bn: "বাংলা", te: "తెలుగు",
+      gu: "ગુજરાતી", kn: "ಕನ್ನಡ", ml: "മലയാളം", ja: "日本語", ar: "العربية", ru: "Русский",
+      es: "Español", fr: "Français", de: "Deutsch"
+    };
+
+    const STOP_WORDS = new Set([
+      "the","and","for","that","with","this","from","are","was","were","have","has","had",
+      "not","but","what","who","when","where","why","how","is","in","on","of","to","a","an",
+      "आहे","आहेत","नाही","आणि","या","ते","ही","हा","मध्ये","एक","वर","ती","त्या","पण","किंवा"
+    ]);
+
+    let currentQuery = "", currentLang = "en", currentSerpTab = "all";
+    let shardDomains = null, shardMeta = { total_pages: 49540, docs_per_file: 100 };
+    const IDX_CACHE = new Map(), DOC_CACHE = new Map();
+    let rankedPids = [], shownCount = 0, loadedShardDocs = [], liveWikiHits = [], liveImageHits = [], liveResearchHits = [];
+    let deferredPrompt = null;
+    let activeAbortController = null;
+
+    // Detect Slow Connection / Data Saver
+    function isSlowConnection() {
+      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (!conn) return false;
+      return conn.saveData || conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g';
+    }
+
+    function detectLanguage(text) {
+      const t = text.trim();
+      if (/[\u0900-\u097F]/.test(t)) {
+        const mr = /[ळऱ]|(आहे|आहेत|नाही|माहिती|कसे|काय|मराठी|महाराष्ट्र|पुणे|मुंबई|शिवाजी|इतिहास|बद्दल|मध्ये|साठी|हवामान)/;
+        const hi = /(है|हैं|क्या|कैसे|क्यों|में|की|का|के|हिंदी|मौसम)/;
+        return (mr.test(t) || !hi.test(t)) ? "mr" : "hi";
+      }
+      if (/[\u0B80-\u0BFF]/.test(t)) return "ta";
+      if (/[\u0980-\u09FF]/.test(t)) return "bn";
+      if (/[\u0C00-\u0C7F]/.test(t)) return "te";
+      if (/[\u0A80-\u0AFF]/.test(t)) return "gu";
+      if (/[\u0C80-\u0CFF]/.test(t)) return "kn";
+      if (/[\u0D00-\u0D7F]/.test(t)) return "ml";
+      if (/[\u3040-\u30FF\u4E00-\u9FAF]/.test(t)) return "ja";
+      if (/[\u0600-\u06FF]/.test(t)) return "ar";
+      return "en";
+    }
+
+    function shardHash(word) {
+      let h = 2166136261;
+      for (let i = 0; i < word.length; i++) {
+        h ^= word.charCodeAt(i);
+        h = Math.imul(h, 16777619) >>> 0;
+      }
+      return h.toString(16).padStart(8, "0").slice(0, 3);
+    }
+
+    function tokenize(text) {
+      return text.toLowerCase().replace(/[।॥.,\/#!$%\^&\*;:{}=\-_`~()?"'<>|\[\]+]+/g, " ").trim().split(/\s+/).filter(w => w.length >= 2);
+    }
+
+    // =========================================================================
+    // 2. ULTRA-FAST SHARDED SEARCH (0.15s STREAMING)
+    // =========================================================================
+    async function initShards() {
+      if (shardDomains) return;
+      try {
+        const [dRes, mRes] = await Promise.all([
+          fetch(`${SHARD_CDN}/domains.json`, { cache: "force-cache" }),
+          fetch(`${SHARD_CDN}/meta.json`, { cache: "force-cache" })
+        ]);
+        if (dRes.ok) shardDomains = await dRes.json();
+        if (mRes.ok) shardMeta = await mRes.json();
+        if (shardDomains) {
+          document.getElementById("shardCountCard").textContent = `${Number(shardMeta.total_pages).toLocaleString()} Pages`;
+          renderNotifications();
+        }
+      } catch (_) {}
+    }
+
+    async function fetchIdxShard(word) {
+      const h = shardHash(word);
+      if (!IDX_CACHE.has(h)) {
+        try {
+          const r = await fetch(`${SHARD_CDN}/idx/${h[0]}/${h}.tsv`, { cache: "force-cache" });
+          IDX_CACHE.set(h, r.ok ? await r.text() : "");
+        } catch (_) { IDX_CACHE.set(h, ""); }
+      }
+      const raw = IDX_CACHE.get(h);
+      if (!raw) return [];
+      for (const line of raw.split(/\r?\n/)) {
+        const tab = line.indexOf("\t");
+        if (tab > 0 && line.slice(0, tab) === word) {
+          return line.slice(tab + 1).split(",").map(p => {
+            const [pid, sc] = p.split(":");
+            return { pid: Number(pid), sc: Number(sc) };
+          });
+        }
+      }
+      return [];
+    }
+
+    async function fetchDocItems(pids, rawQuery) {
+      const perFile = shardMeta.docs_per_file || 100;
+      const neededFiles = [...new Set(pids.map(id => Math.floor(id / perFile)))];
+      await Promise.all(neededFiles.map(async fidx => {
+        if (DOC_CACHE.has(fidx)) return;
+        const folder = String(Math.floor(fidx / 100)).padStart(2, "0");
+        const fname = String(fidx).padStart(4, "0");
+        try {
+          const r = await fetch(`${SHARD_CDN}/docs/${folder}/${fname}.tsv`, { cache: "force-cache" });
+          DOC_CACHE.set(fidx, r.ok ? (await r.text()).split(/\r?\n/) : []);
+        } catch (_) { DOC_CACHE.set(fidx, []); }
+      }));
+
+      const qLow = rawQuery.toLowerCase();
+      const out = [];
+
+      for (const pid of pids) {
+        const fidx = Math.floor(pid / perFile);
+        const line = (DOC_CACHE.get(fidx) || [])[pid % perFile];
+        if (!line) continue;
+        const [did, path, title, desc] = line.split("\t");
+        const origin = (shardDomains && shardDomains[did]) ? shardDomains[did] : "https://factpedia-mr.pages.dev";
+        const host = origin.replace(/^https?:\/\//, "");
+        const fullUrl = origin + path;
+
+        // ★ GOOGLE-GRADE RANKING BOOST ★
+        let boostScore = 0;
+        if (path === "/" || path === "" || path.length < 5) boostScore += 35; // Root domain boost!
+        if (title.toLowerCase().includes(qLow)) boostScore += 25;              // Title match
+        if (origin.includes("gov.in") || origin.includes("factpedia")) boostScore += 20; // Official boost
+
+        out.push({
+          site: host.replace(/^www\./, ""),
+          url: fullUrl,
+          title: title || host,
+          desc: desc || "",
+          icon: host.replace(/^www\./, "")[0]?.toUpperCase() || "W",
+          type: "shard",
+          rank: boostScore
+        });
+      }
+
+      // Sort with clean URL & authority boost
+      out.sort((a, b) => b.rank - a.rank);
+      return out;
+    }
+
+    async function searchShardsProgressive(q) {
+      if (!shardDomains) await initShards();
+      if (!shardDomains) return;
+
+      let tokens = tokenize(q).filter(w => !STOP_WORDS.has(w));
+      if (!tokens.length) tokens = tokenize(q);
+      if (!tokens.length) return;
+
+      const lists = await Promise.all(tokens.map(t => fetchIdxShard(t)));
+      const map = new Map();
+      lists.forEach(list => {
+        for (const { pid, sc } of list) {
+          const cur = map.get(pid) || { pid, sc: 0, hits: 0 };
+          cur.sc += sc; cur.hits += 1;
+          map.set(pid, cur);
+        }
+      });
+
+      rankedPids = Array.from(map.values())
+        .sort((a, b) => (b.hits * 150 + b.sc) - (a.hits * 150 + a.sc))
+        .map(x => x.pid);
+
+      shownCount = 0;
+      loadedShardDocs = [];
+
+      // Stream the first 10 immediately in <0.2s!
+      await loadMoreShards(10);
+    }
+
+    async function loadMoreShards(batch = 10) {
+      const nextPids = rankedPids.slice(shownCount, shownCount + batch);
+      if (!nextPids.length) return;
+      shownCount += nextPids.length;
+      const items = await fetchDocItems(nextPids, currentQuery);
+      loadedShardDocs.push(...items);
+      renderSerpResults();
+    }
+
+    // =========================================================================
+    // 3. PROGRESSIVE STREAMING SEARCH ORCHESTRATION
+    // =========================================================================
+    function switchScreen(name) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById(`screen-${name}`).classList.add("active");
+      document.getElementById("mainHeader").style.display = (name === "search") ? "none" : "flex";
+      document.querySelectorAll(".d-nav-btn").forEach(b => b.classList.toggle("active", b.dataset.nav === name));
+      document.querySelectorAll(".bnav-item").forEach(b => b.classList.toggle("active", b.dataset.bnav === name || (name === "aimode" && b.dataset.bnav === "search")));
+      if (name === "activity") renderActivity();
+      window.scrollTo(0, 0);
+    }
+
+    function handleSearchSubmit(e, id) { e.preventDefault(); const v = document.getElementById(id).value.trim(); if (v) executeSearch(v); }
+    function executeImageJump() { const q = document.getElementById("homeInput").value.trim() || "Maharashtra forts"; currentSerpTab = "images"; executeSearch(q).then(() => setSerpTab("images")); }
+
+    async function executeSearch(query, overrideLang = null) {
+      const q = query.trim();
+      if (!q) return;
+
+      if (activeAbortController) activeAbortController.abort();
+      activeAbortController = new AbortController();
+      const signal = activeAbortController.signal;
+
+      currentQuery = q;
+      currentLang = overrideLang || detectLanguage(q);
+      document.getElementById("homeInput").value = q;
+      document.getElementById("serpInput").value = q;
+      document.getElementById("aiInput").value = q;
+      document.getElementById("homeAC").style.display = "none";
+      document.getElementById("serpAC").style.display = "none";
+
+      saveHistory(q, currentLang);
+      switchScreen("search");
+
+      const t0 = performance.now();
+      rankedPids = []; loadedShardDocs = []; liveWikiHits = []; liveImageHits = []; liveResearchHits = [];
+      document.getElementById("serpResults").innerHTML = `<div style="color:var(--muted); padding:10px 0;">Searching ${Number(shardMeta.total_pages).toLocaleString()} pages & Wikipedia...</div>`;
+
+      // 1) Instant Local Widgets & Instant Shard Results (0.15s - 0.3s First Paint!)
+      runInstantWidgets(q);
+      await searchShardsProgressive(q);
+
+      const firstSec = ((performance.now() - t0) / 1000).toFixed(3);
+      document.getElementById("serpMeta").innerHTML =
+        `<span>About ${(rankedPids.length + 10).toLocaleString()} results (${firstSec} sec)</span>` +
+        `<span class="lang-chip">Auto: ${LANG_NAMES[currentLang] || currentLang}</span>` +
+        (isSlowConnection() ? `<span class="lang-chip" style="background:#fce8e6; color:#c5221f;">Low-Data Mode</span>` : "");
+      renderSerpResults();
+
+      // 2) Background Stream: Wikipedia, Images & Research (Never blocks Shards!)
+      const bgTasks = [fetchWikipediaSERP(q, currentLang, signal)];
+      if (!isSlowConnection() && currentSerpTab !== "shards") {
+        bgTasks.push(fetchImages(q, signal));
+      }
+      bgTasks.push(fetchOpenAlexAndGitHub(q, signal));
+
+      Promise.allSettled(bgTasks).then(() => {
+        renderSerpResults();
+      });
+    }
+
+    function setSerpTab(tab) {
+      currentSerpTab = tab;
+      document.querySelectorAll(".stab").forEach(t => t.classList.toggle("active", t.dataset.tab === tab));
+      const body = document.getElementById("serpBody"), aside = document.getElementById("kpAside");
+      if (tab === "images") { body.classList.add("full-grid"); aside.style.display = "none"; }
+      else { body.classList.remove("full-grid"); aside.style.display = "block"; }
+      renderSerpResults();
+    }
+
+    function renderSerpResults() {
+      const container = document.getElementById("serpResults");
+
+      if (currentSerpTab === "images") {
+        container.innerHTML = liveImageHits.length ? `<div class="images-grid">${liveImageHits.map(im => `
+          <div class="img-grid-card" onclick="openLightbox('${escAttr(im.full || im.thumb)}', '${escAttr(im.title)}', '${escAttr(im.pageUrl)}')">
+            <img src="${esc(im.thumb)}" loading="lazy" /><div class="img-grid-meta"><div class="img-grid-title">${esc(im.title)}</div><div class="img-grid-src">${esc(im.source)}</div></div>
+          </div>`).join("")}</div>` : `<p style="color:var(--muted);">No images found for "${esc(currentQuery)}".</p>`;
+        return;
+      }
+
+      if (currentSerpTab === "research") {
+        container.innerHTML = liveResearchHits.length ? liveResearchHits.map(p => `
+          <article class="g-result">
+            <div class="g-res-main">
+              <div class="g-site-row"><div class="g-favicon">${esc(p.icon)}</div><div><div class="g-site-name">${esc(p.site)}</div><div class="g-url">${esc(p.url)}</div></div></div>
+              <a class="g-title" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>
+              <p class="g-desc">${esc(p.desc)}</p>
+            </div>
+          </article>`).join("") : `<p style="color:var(--muted);">Searching academic papers & repositories for "${esc(currentQuery)}"...</p>`;
+        return;
+      }
+
+      const wikiMapped = liveWikiHits.map(w => ({ site: `Wikipedia (${w.lang.toUpperCase()})`, url: w.url, title: `${w.title} - Wikipedia`, desc: w.extract, icon: "W", thumb: w.thumb }));
+      const qL = currentQuery.toLowerCase();
+      const socialHits = SOCIAL_PORTALS.filter(s => s[1].toLowerCase().includes(qL) || s[3].includes(qL)).map(s => ({ site: s[1], url: s[0], title: s[1], desc: s[2], icon: s[4] }));
+
+      let rawList = [];
+      if (currentSerpTab === "all") rawList = [...socialHits, ...wikiMapped.slice(0, 3), ...loadedShardDocs, ...wikiMapped.slice(3), ...liveResearchHits.slice(0, 2)];
+      else if (currentSerpTab === "wiki") rawList = wikiMapped;
+      else if (currentSerpTab === "shards") rawList = loadedShardDocs;
+      else if (currentSerpTab === "social") rawList = SOCIAL_PORTALS.map(s => ({ site: s[1], url: s[0], title: s[1], desc: s[2], icon: s[4] }));
+
+      // Clean Deduplication
+      const seen = new Set();
+      const list = rawList.filter(item => {
+        const key = item.url.replace(/\/$/, "").toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+
+      let imgStrip = "";
+      if (currentSerpTab === "all" && liveImageHits.length && !isSlowConnection()) {
+        imgStrip = `<div class="img-strip">${liveImageHits.slice(0, 8).map(im => `<div class="img-strip-card" onclick="openLightbox('${escAttr(im.full || im.thumb)}', '${escAttr(im.title)}', '${escAttr(im.pageUrl)}')"><img src="${esc(im.thumb)}" loading="lazy" /><div class="img-strip-cap">${esc(im.title)}</div></div>`).join("")}</div>`;
+      }
+
+      const moreBtn = (shownCount < rankedPids.length && (currentSerpTab === "all" || currentSerpTab === "shards"))
+        ? `<button class="load-more-btn" onclick="loadMoreShards(10)">More results (${(rankedPids.length - shownCount).toLocaleString()} remaining)</button>` : "";
+
+      container.innerHTML = imgStrip + (list.length ? list.map(p => `
+        <article class="g-result">
+          <div class="g-res-main">
+            <div class="g-site-row"><div class="g-favicon">${esc(p.icon)}</div><div><div class="g-site-name">${esc(p.site)}</div><div class="g-url">${esc(p.url)}</div></div></div>
+            <a class="g-title" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>
+            <p class="g-desc">${esc(p.desc)}</p>
+          </div>
+          ${p.thumb && !isSlowConnection() ? `<img class="g-res-thumb" src="${esc(p.thumb)}" loading="lazy" onclick="openLightbox('${escAttr(p.thumb)}', '${escAttr(p.title)}', '${escAttr(p.url)}')" />` : ""}
+        </article>`).join("") : `<p style="color:var(--muted);">No matching results found for "${esc(currentQuery)}".</p>`) + moreBtn;
+    }
+
+    // =========================================================================
+    // 4. RESEARCH PAPERS (OPENALEX) & CODE (GITHUB)
+    // =========================================================================
+    async function fetchOpenAlexAndGitHub(query, signal) {
+      const core = extractCoreQuery(query);
+      const items = [];
+      try {
+        // OpenAlex (250M+ Free Academic Papers)
+        const oUrl = `https://api.openalex.org/works?search=${encodeURIComponent(core)}&per-page=3`;
+        const oRes = await fetch(oUrl, { signal });
+        if (oRes.ok) {
+          const oData = await oRes.json();
+          for (const w of (oData.results || [])) {
+            items.push({
+              site: "OpenAlex • Academic Research",
+              url: w.doi || w.id,
+              title: `${w.title || core} (${w.publication_year || ""})`,
+              desc: `Scientific paper cited by ${w.cited_by_count || 0} works. Authors: ${(w.authorships || []).map(a => a.author.display_name).slice(0, 3).join(", ")}.`,
+              icon: "OA"
+            });
+          }
+        }
+      } catch (_) {}
+
+      try {
+        // GitHub Public Repository API
+        const gUrl = `https://api.github.com/search/repositories?q=${encodeURIComponent(core)}&per_page=2`;
+        const gRes = await fetch(gUrl, { signal });
+        if (gRes.ok) {
+          const gData = await gRes.json();
+          for (const r of (gData.items || [])) {
+            items.push({
+              site: "GitHub Repository",
+              url: r.html_url,
+              title: `${r.full_name} ★ ${r.stargazers_count}`,
+              desc: r.description || `Open-source software repository built with ${r.language || "Code"}.`,
+              icon: "G"
+            });
+          }
+        }
+      } catch (_) {}
+
+      liveResearchHits = items;
+    }
+
+    // =========================================================================
+    // 5. INSTANT WIDGETS (Calc, Units, Currency, Weather, Dictionary)
+    // =========================================================================
+    const WMO = { 0:"Clear ☀️", 1:"Mostly Clear 🌤️", 2:"Partly Cloudy ⛅", 3:"Overcast ☁️", 45:"Foggy 🌫️", 51:"Drizzle 🌦️", 61:"Light Rain 🌧️", 63:"Moderate Rain 🌧️", 65:"Heavy Rain ⛈️", 95:"Thunderstorm ⛈️" };
+    const MR_CITY = { "पुणे":"Pune", "मुंबई":"Mumbai", "नागपूर":"Nagpur", "नाशिक":"Nashik", "कोल्हापूर":"Kolhapur", "सातारा":"Satara", "दिल्ली":"Delhi" };
+    const CURR_SET = new Set(["USD","INR","EUR","GBP","JPY","AUD","CAD","CHF","CNY","SGD","HKD","NZD","SEK","NOK","KRW","ZAR","BRL","MXN","THB","MYR","IDR","PHP","TRY","PLN","DKK","AED"]);
+
+    async function runInstantWidgets(q) {
+      const area = document.getElementById("instantWidgetArea"); area.innerHTML = "";
+      const c = q.trim(), mc = c.replace(/,/g, "");
+
+      // 1) Calculator
+      if (/^[0-9+\-*/().%\s]+$/.test(mc) && /[+\-*/%]/.test(mc)) {
+        try { const v = Function(`"use strict"; return (${mc})`)(); if (isFinite(v)) { area.innerHTML = `<div class="widget-card"><div class="w-sub">${esc(c)} =</div><div class="w-big">${v.toLocaleString("en-IN")}</div></div>`; return; } } catch (_) {}
+      }
+
+      // 2) Unit Converter
+      const um = c.match(/^([\d.]+)\s*(km|m|cm|mile|miles|kg|g|lb|lbs|c|f)\s+(?:to|in)\s+(km|m|cm|mile|miles|kg|g|lb|lbs|c|f)$/i);
+      if (um) {
+        const n = parseFloat(um[1]), f = um[2].toLowerCase().replace(/s$/,""), t = um[3].toLowerCase().replace(/s$/,"");
+        let out = null;
+        if (f==="km"&&t==="mile") out=n*0.621371; else if (f==="mile"&&t==="km") out=n*1.60934;
+        else if (f==="m"&&t==="cm") out=n*100; else if (f==="cm"&&t==="m") out=n/100;
+        else if (f==="kg"&&t==="lb") out=n*2.20462; else if (f==="lb"&&t==="kg") out=n*0.453592;
+        else if (f==="kg"&&t==="g") out=n*1000; else if (f==="g"&&t==="kg") out=n/1000;
+        else if (f==="c"&&t==="f") out=(n*9/5)+32; else if (f==="f"&&t==="c") out=(n-32)*5/9;
+        if (out !== null) { area.innerHTML = `<div class="widget-card"><div class="w-sub">Unit Conversion</div><div class="w-big">${n} ${f} = ${out.toFixed(2)} ${t}</div></div>`; return; }
+      }
+
+      // 3) Currency Converter
+      const cm = c.match(/^(?:([\d.,]+)\s+)?([a-zA-Z]{3})\s+(?:to|in)\s+([a-zA-Z]{3})$/i);
+      if (cm && CURR_SET.has(cm[2].toUpperCase()) && CURR_SET.has(cm[3].toUpperCase())) {
+        const amt = parseFloat((cm[1] || "1").replace(/,/g, "")) || 1, f = cm[2].toUpperCase(), t = cm[3].toUpperCase();
+        try {
+          const r = await fetch(`https://api.frankfurter.dev/v1/latest?base=${f}&symbols=${t}`);
+          if (r.ok) { const d = await r.json(), rate = d.rates?.[t]; if (rate) {
+            area.innerHTML = `<div class="widget-card"><div class="w-sub" id="cS">${amt} ${f} equals</div><div class="w-big" id="cB">${(amt*rate).toFixed(2)} ${t}</div><div class="w-sub">Rate date: ${esc(d.date)}</div><div class="curr-row"><input type="number" value="${amt}" style="width:110px;" oninput="document.getElementById('cB').textContent=(parseFloat(this.value||0)*${rate}).toFixed(2)+' ${t}'; document.getElementById('cS').textContent=(this.value||0)+' ${f} equals';" /><span>1 ${f} = ${rate} ${t}</span></div></div>`; return;
+          }}
+        } catch (_) {}
+      }
+
+      // 4) Weather (With Official Open-Meteo Attribution)
+      const wm = c.match(/^(?:weather\s+(?:in\s+)?(.+)|(.+?)\s+(?:weather|हवामान|मौसम))$/i);
+      if (wm) {
+        let city = (wm[1] || wm[2] || "").trim(); city = MR_CITY[city] || city;
+        try {
+          const g = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`)).json();
+          const loc = g.results?.[0];
+          if (loc) {
+            const fc = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto`)).json();
+            area.innerHTML = `<div class="widget-card"><div class="w-top"><div><div style="font-weight:600;">${esc(loc.name)}, ${esc(loc.country||"")}</div><div class="w-big">${Math.round(fc.current.temperature_2m)}°C</div><div class="w-sub">${WMO[fc.current.weather_code]||"Weather"}</div></div><div style="text-align:right;font-size:0.84rem;color:var(--muted);"><div>High: ${Math.round(fc.daily.temperature_2m_max[0])}°C • Low: ${Math.round(fc.daily.temperature_2m_min[0])}°C</div><div>Humidity: ${fc.current.relative_humidity_2m}%</div><div>Wind: ${fc.current.wind_speed_10m} km/h</div></div></div><div style="font-size:0.72rem; color:var(--muted); margin-top:8px;">Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener" style="color:var(--muted);">Open-Meteo.com</a></div></div>`;
+            return;
+          }
+        } catch (_) {}
+      }
+
+      // 5) Dictionary
+      const dm = c.match(/^(?:define|meaning of|definition of)\s+([a-zA-Z-]+)$/i);
+      if (dm) {
+        try {
+          const r = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(dm[1])}`);
+          if (r.ok) { const e = (await r.json())[0], aud = e.phonetics?.find(p=>p.audio)?.audio||"", m = e.meanings?.[0];
+            area.innerHTML = `<div class="widget-card"><div style="display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:1.4rem;font-weight:600;">${esc(e.word)}</div><div class="w-sub">${esc(e.phonetic||"")}</div></div>${aud?`<button class="dict-audio" onclick="new Audio('${escAttr(aud)}').play()">🔊 Pronounce</button>`:""}</div>${m?`<div class="dict-pos">${esc(m.partOfSpeech)}</div><div style="font-size:0.9rem;">${esc(m.definitions[0]?.definition||"")}</div>`:""}</div>`;
+          }
+        } catch (_) {}
+      }
+    }
+
+    // =========================================================================
+    // 6. WHOLE WIKIPEDIA, IMAGES & AI MODE
+    // =========================================================================
+    function extractCoreQuery(q) {
+      return q.replace(/^(who is|who was|who invented|what is|when was|where is|tell me about|explain|define|meaning of|weather in)\s+/i, "").replace(/(कोण आहे|काय आहे|माहिती द्या|हवामान|कौन है|क्या है)/g, "").replace(/[?？।!]/g, "").trim() || q;
+    }
+
+    async function queryWholeWikipedia(query, lang, limit = 6, signal = null) {
+      const r = await fetch(`https://${lang}.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=${limit}&prop=extracts|pageimages|info&exintro=1&explaintext=1&exsentences=5&piprop=thumbnail&pithumbsize=500&inprop=url&format=json&origin=*`, { signal });
+      if (!r.ok) return [];
+      const pages = Object.values((await r.json())?.query?.pages || {}).sort((a,b)=>(a.index||99)-(b.index||99));
+      return pages.map(p => ({ title: p.title, extract: p.extract||"", thumb: p.thumbnail?.source||"", url: p.fullurl || `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(p.title.replace(/ /g,"_"))}`, lang })).filter(p => p.extract);
+    }
+
+    async function fetchWikipediaSERP(query, lang, signal = null) {
+      const kp = document.getElementById("kpPanel"), core = extractCoreQuery(query);
+      try {
+        let hits = await queryWholeWikipedia(core, lang, 6, signal);
+        if (!hits.length && lang !== "en") hits = await queryWholeWikipedia(core, "en", 6, signal);
+        liveWikiHits = hits;
+        if (hits.length) {
+          const top = hits[0], langs = ["en","mr","hi","es","fr","de","ja","ta","bn","ar"];
+          kp.style.display = "block";
+          kp.innerHTML = `${top.thumb && !isSlowConnection() ?`<img class="kp-photo" src="${esc(top.thumb)}" loading="lazy" onclick="openLightbox('${escAttr(top.thumb)}','${escAttr(top.title)}','${escAttr(top.url)}')" />`:""}<div class="kp-inner"><h2 class="kp-h">${esc(top.title)}</h2><div class="kp-sub">Wikipedia (${top.lang.toUpperCase()}) • CC BY-SA 4.0</div><p class="kp-p">${esc(top.extract)}</p><a class="g-title" style="font-size:0.9rem;" href="${esc(top.url)}" target="_blank" rel="noopener">Wikipedia Article ↗</a><div class="kp-langs">${langs.map(lc=>`<button class="kp-lbtn ${lc===top.lang?"active":""}" onclick="executeSearch('${escAttr(query)}','${lc}')">${lc.toUpperCase()}</button>`).join("")}</div></div>`;
+        } else kp.style.display = "none";
+      } catch (_) { kp.style.display = "none"; }
+    }
+
+    async function fetchImages(query, signal = null) {
+      const core = extractCoreQuery(query), col = [], seen = new Set();
+      try {
+        const r = await fetch(`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(core)}&gsrlimit=10&prop=imageinfo&iiprop=url|mime&iiurlwidth=480&format=json&origin=*`, { signal });
+        if (r.ok) {
+          for (const p of Object.values((await r.json())?.query?.pages || {})) {
+            const info = p.imageinfo?.[0];
+            if (!info?.thumburl || /pdf|ogg|webm|audio|tiff/i.test(info.mime||"") || seen.has(info.thumburl)) continue;
+            seen.add(info.thumburl);
+            col.push({ title: p.title.replace(/^File:/,"").replace(/\.[^.]+$/,"").replace(/_/g," "), thumb: info.thumburl, full: info.url||info.thumburl, pageUrl: info.descriptionurl||info.url, source: "Wikimedia Commons" });
+          }
+        }
+      } catch (_) {}
+      liveImageHits = col; return col;
+    }
+
+    function pickDirectSentence(fullExtract, rawQ) {
+      const sents = fullExtract.split(/(?<=[.!?।])\s+/).filter(Boolean);
+      if (!sents.length) return fullExtract;
+      if (/\b(when|born|died|date|year|कधी|जन्म|कब)\b/i.test(rawQ)) {
+        const hit = sents.find(s => /\b(1\d{3}|20\d{2})\b/.test(s));
+        if (hit) return hit;
+      }
+      return sents.slice(0, 2).join(" ");
+    }
+
+    function handleAISubmit(e) { e.preventDefault(); const q = document.getElementById("aiInput").value.trim(); if (q) openAIMode(q); }
+
+    async function openAIMode(query) {
+      const q = (query || "Who invented the telephone").trim(); currentQuery = q;
+      const lang = detectLanguage(q), core = extractCoreQuery(q);
+      document.getElementById("aiInput").value = q;
+      document.getElementById("aiLangChip").textContent = `Auto: ${LANG_NAMES[lang]||lang}`;
+      switchScreen("aimode"); saveHistory(`AI: ${q}`, lang);
+
+      const dEl = document.getElementById("aiDirectContainer"), iEl = document.getElementById("aiImagesContainer"), cEl = document.getElementById("aiAnswerCard");
+      dEl.innerHTML = `<div class="direct-ans-box"><div class="da-tag">✦ Direct Answer • Whole Wikipedia</div><div style="color:var(--muted);">Searching Wikipedia & Fastx Index...</div></div>`;
+      iEl.innerHTML = ""; cEl.innerHTML = "";
+
+      try {
+        let [wikiHits, imgs] = await Promise.all([queryWholeWikipedia(core, lang, 6), fetchImages(core), searchShardsProgressive(core)]);
+        if (!wikiHits.length && lang !== "en") wikiHits = await queryWholeWikipedia(core, "en", 6);
+
+        if (wikiHits.length) {
+          const top = wikiHits[0];
+          dEl.innerHTML = `<div class="direct-ans-box"><div class="da-tag">✦ Direct Answer • Wikipedia (${top.lang.toUpperCase()})</div><p class="da-main">${esc(pickDirectSentence(top.extract, q))}</p><div class="da-sub"><a href="${esc(top.url)}" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none;font-weight:600;">${esc(top.title)} — Wikipedia ↗</a></div></div>`;
+          const allImgs = [...imgs];
+          if (top.thumb && !allImgs.some(i => i.thumb === top.thumb)) allImgs.unshift({ title: top.title, thumb: top.thumb, full: top.thumb, pageUrl: top.url, source: "Wikipedia" });
+          if (allImgs.length && !isSlowConnection()) iEl.innerHTML = `<div class="img-strip" style="margin-bottom:16px;">${allImgs.slice(0,8).map(im=>`<div class="img-strip-card" onclick="openLightbox('${escAttr(im.full||im.thumb)}','${escAttr(im.title)}','${escAttr(im.pageUrl)}')"><img src="${esc(im.thumb)}" loading="lazy" /><div class="img-strip-cap">${esc(im.title)}</div></div>`).join("")}</div>`;
+
+          const bullets = wikiHits.slice(1, 5).map(w => `<li><strong>${esc(w.title)}:</strong> ${esc(w.extract.split(/(?<=[.!?।])\s+/)[0])}</li>`).join("");
+          const srcCards = [
+            ...wikiHits.slice(0, 3).map(w => `<a class="ai-src-card" href="${esc(w.url)}" target="_blank" rel="noopener"><div class="ai-src-title">${esc(w.title)}</div><div class="ai-src-site">Wikipedia (${w.lang.toUpperCase()})</div></a>`),
+            ...loadedShardDocs.slice(0, 3).map(s => `<a class="ai-src-card" href="${esc(s.url)}" target="_blank" rel="noopener"><div class="ai-src-title">${esc(s.title)}</div><div class="ai-src-site">${esc(s.site)}</div></a>`)
+          ].join("");
+
+          cEl.innerHTML = `
+            <div class="ai-answer"><h3 style="margin:0 0 8px;">${esc(top.title)}</h3><p style="margin:0 0 12px;">${esc(top.extract)}</p>${bullets?`<div style="font-weight:600;">Related Wikipedia Topics:</div><ul style="padding-left:20px;margin:6px 0 12px;">${bullets}</ul>`:""}</div>
+            <div class="ai-sources">${srcCards}</div>
+            <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;">
+              <button class="kp-lbtn" onclick="executeSearch('${escAttr(q)}')">Open Web + 50k Shards Results →</button>
+              <button class="kp-lbtn" onclick="executeSearch('${escAttr(q)}','mr')">मराठीत पहा</button>
+              <button class="kp-lbtn" onclick="executeSearch('${escAttr(q)}','hi')">हिन्दी में देखें</button>
+            </div>`;
+        } else {
+          dEl.innerHTML = `<div class="direct-ans-box"><p class="da-main">No direct Wikipedia match found for "${esc(q)}".</p></div>`;
+        }
+      } catch (_) {
+        dEl.innerHTML = `<div class="direct-ans-box"><p class="da-main">Connect to internet for AI Mode answers.</p></div>`;
+      }
+    }
+
+    // =========================================================================
+    // 7. DISCOVER FEED (AUTOMATED NEWS / WIKIPEDIA), AUTOCOMPLETE & MODALS
+    // =========================================================================
+    async function loadDiscoverFeed() {
+      const feed = document.getElementById("discoverFeed"), now = new Date();
+      document.getElementById("todayLabel").textContent = now.toDateString();
+
+      // 1) Try loading live news.json (Updated by GitHub Actions!)
+      try {
+        const nRes = await fetch(`${SHARD_CDN}/news.json`, { cache: "no-cache" });
+        if (nRes.ok) {
+          const newsItems = await nRes.json();
+          if (newsItems && newsItems.length) {
+            feed.innerHTML = newsItems.slice(0, 6).map(it => `
+              <div class="feed-card" onclick="window.open('${escAttr(it.url)}','_blank')">
+                ${it.img && !isSlowConnection() ? `<img class="feed-img" src="${esc(it.img)}" loading="lazy" />` : ""}
+                <div class="feed-body">
+                  <div class="feed-title">${esc(it.title)}</div>
+                  <div class="feed-meta"><span>${esc(it.source || "News")}</span><span>• ${esc(it.time || "Today")}</span></div>
+                </div>
+              </div>`).join("");
+            return;
+          }
+        }
+      } catch (_) {}
+
+      // 2) Fallback to Wikipedia Featured Feed
+      try {
+        const y = now.getUTCFullYear(), m = String(now.getUTCMonth()+1).padStart(2,"0"), d = String(now.getUTCDate()).padStart(2,"0");
+        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/feed/featured/${y}/${m}/${d}`);
+        if (res.ok) {
+          const data = await res.json(), items = [];
+          if (data.tfa) items.push({ title: data.tfa.titles?.normalized || data.tfa.title, img: data.tfa.thumbnail?.source, url: data.tfa.content_urls?.desktop?.page, src: "Wikipedia Featured" });
+          for (const a of (data.mostread?.articles || []).filter(x => x.thumbnail && x.titles?.normalized !== "Main Page").slice(0, 5)) items.push({ title: `${a.titles.normalized}${a.description?": "+a.description:""}`, img: a.thumbnail.source, url: a.content_urls?.desktop?.page, src: "Trending on Wikipedia" });
+          if (items.length) {
+            feed.innerHTML = items.map(it=>`<div class="feed-card" onclick="window.open('${escAttr(it.url)}','_blank')">${it.img && !isSlowConnection() ?`<img class="feed-img" src="${esc(it.img)}" loading="lazy" />`:""}<div class="feed-body"><div class="feed-title">${esc(it.title)}</div><div class="feed-meta"><span>W</span><span>${esc(it.src)}</span></div></div></div>`).join("");
+            return;
+          }
+        }
+      } catch (_) {}
+
+      feed.innerHTML = `<div class="feed-card" onclick="executeSearch('factpedia')"><div class="feed-body" style="padding-top:12px;"><div class="feed-title">Factpedia: १,१६२ मराठी लेख आणि ४९,५४० वेबपेजेस शोधा</div></div></div>`;
+    }
+
+    function onTypeAC(inputId, acId) {
+      const val = document.getElementById(inputId).value.trim().toLowerCase(), box = document.getElementById(acId);
+      if (val.length < 2) { box.style.display = "none"; return; }
+      const hist = JSON.parse(localStorage.getItem("fastx_hist")||"[]").map(x => ({ t: x.q.replace(/^AI:\s*/,""), s: "Recent" }));
+      const pool = [...hist, ...QUICK_SUGGESTIONS.map(t => ({ t, s: "Suggested" })), ...SOCIAL_PORTALS.map(p => ({ t: p[1], s: "Portal" }))];
+      const seen = new Set(), hits = [];
+      for (const item of pool) {
+        if (item.t.toLowerCase().includes(val) && !seen.has(item.t.toLowerCase())) {
+          seen.add(item.t.toLowerCase()); hits.push(item); if (hits.length >= 6) break;
+        }
+      }
+      if (!hits.length) { box.style.display = "none"; return; }
+      box.innerHTML = hits.map(h => `<div class="ac-row" onclick="executeSearch('${escAttr(h.t)}')"><span>${esc(h.t)}</span><span class="sub">${esc(h.s)}</span></div>`).join("");
+      box.style.display = "block";
+    }
+
+    function registerPWA() {
+      if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
+      window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferredPrompt = e; document.getElementById("installBtn").style.display = "inline-block"; });
+    }
+    async function installPWA() { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; document.getElementById("installBtn").style.display = "none"; }
+    function startVoice(id, isAI = false) { const SR = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SR) return alert("Use Chrome/Edge for Voice Search"); const r = new SR(); r.onresult = e => { const t = e.results[0][0].transcript; document.getElementById(id).value = t; isAI ? openAIMode(t) : executeSearch(t); }; r.start(); }
+
+    function openLightbox(u, c, s) { document.getElementById("lbImg").src = u; document.getElementById("lbCap").textContent = c; document.getElementById("lbSource").href = s || u; document.getElementById("lightbox").classList.add("open"); }
+    function closeLightbox(e) { if (!e || e.target.id === "lightbox" || e.target.tagName === "BUTTON") document.getElementById("lightbox").classList.remove("open"); }
+
+    function showLegalModal() { document.getElementById("legalModal").classList.add("open"); }
+    function closeLegalModal(e) { if (!e || e.target.id === "legalModal" || e.target.tagName === "BUTTON") document.getElementById("legalModal").classList.remove("open"); }
+
+    function saveHistory(q, l) { const a = JSON.parse(localStorage.getItem("fastx_hist")||"[]").filter(x=>x.q!==q); a.unshift({q,l,t:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}); localStorage.setItem("fastx_hist", JSON.stringify(a.slice(0,30))); }
+    function renderActivity() { const a = JSON.parse(localStorage.getItem("fastx_hist")||"[]"), el = document.getElementById("activityList"); el.innerHTML = a.length ? a.map(i=>`<div class="list-card" onclick="executeSearch('${escAttr(i.q.replace(/^AI:\s*/,""))}')"><div><div style="font-weight:500;">${esc(i.q)}</div><div style="font-size:0.78rem;color:var(--muted);">${LANG_NAMES[i.l]||i.l}</div></div><span style="font-size:0.78rem;color:var(--muted);">${esc(i.t)}</span></div>`).join("") : `<div style="color:var(--muted);">No activity yet.</div>`; }
+    function clearHistory() { localStorage.removeItem("fastx_hist"); renderActivity(); }
+
+    function renderNotifications() {
+      const ok = shardDomains !== null;
+      document.getElementById("notifList").innerHTML = `
+        <div class="list-card" onclick="switchScreen('home')"><div><div style="font-weight:600;">Fastx Shards: ${ok ? Number(shardMeta.total_pages).toLocaleString() + " Pages Connected!" : "Connecting..."}</div><div style="font-size:0.84rem;color:var(--muted);">Repo: shravan-info/fastx-data@v1 • 1,890 Websites (Streaming Mode)</div></div><span class="mini-badge ${ok?"live":""}">${ok?"Live":"Loading"}</span></div>
+        <div class="list-card" onclick="setSerpTab('research')"><div><div style="font-weight:600;">OpenAlex & GitHub Integrated</div><div style="font-size:0.84rem;color:var(--muted);">Search 250M+ scientific research papers & code repositories.</div></div><span class="mini-badge live">New</span></div>
+        <div class="list-card" onclick="openAIMode('ISRO')"><div><div style="font-weight:600;">AI Mode + Whole Wikipedia + Images</div><div style="font-size:0.84rem;color:var(--muted);">Direct Answers + Open-Meteo Weather Attribution.</div></div><span class="mini-badge live">Active</span></div>`;
+    }
+    function esc(s) { return String(s).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
+    function escAttr(s) { return String(s).replace(/['"\\]/g, ""); }
+    document.addEventListener("click", e => { if (!e.target.closest(".search-wrap")) { document.getElementById("homeAC").style.display="none"; document.getElementById("serpAC").style.display="none"; } });
+
+    initShards();
+    renderNotifications();
+    loadDiscoverFeed();
+    registerPWA();
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=18.5204&longitude=73.8567&current=temperature_2m&timezone=auto").then(r=>r.json()).then(d=>{document.getElementById("homeWeatherTemp").textContent=`${Math.round(d.current.temperature_2m)}°C • Pune`;}).catch(()=>{});
+  </script>
+</body>
+</html>
