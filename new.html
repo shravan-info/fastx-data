@@ -7,7 +7,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="Fastx" />
   <link rel="manifest" href="manifest.json" />
-  <script src="q.js"></script>
   <title>Fastx</title>
   <style>
     :root {
@@ -1057,5 +1056,8 @@
     registerPWA();
     fetch("https://api.open-meteo.com/v1/forecast?latitude=18.5204&longitude=73.8567&current=temperature_2m&timezone=auto").then(r=>r.json()).then(d=>{document.getElementById("homeWeatherTemp").textContent=`${Math.round(d.current.temperature_2m)}°C • Pune`;}).catch(()=>{});
   </script>
+  <script src="q.js"></script>
+</body>
+</html>
 </body>
 </html>
