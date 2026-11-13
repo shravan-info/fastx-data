@@ -1,0 +1,100 @@
+44	/rust-lang-ci	The Rust Programming Language's CI · GitHub	CI builds for repositories in @rust-lang. The Rust Programming Language's CI has 3 repositories available. Follow their code on GitHub.
+44	/rust-lang-nursery	rust-lang-nursery · GitHub	rust-lang-nursery has 23 repositories available. Follow their code on GitHub.
+44	/discourse/discourse/blob/main/docs/SECURITY.md	discourse/docs/SECURITY.md at main · discourse/discourse · GitHub	A platform for community discussion. Free, open, simple. - discourse/docs/SECURITY.md at main · discourse/discourse
+44	/rust-analyzer	rust-analyzer · GitHub	Building next-generation IDE tooling for Rust. rust-analyzer has 24 repositories available. Follow their code on GitHub.
+44	/rust-embedded/awesome-embedded-rust	GitHub - rust-embedded/awesome-embedded-rust: Curated list of resources for Embedded and Low-level development in the Ru	Curated list of resources for Embedded and Low-level development in the Rust programming language - rust-embedded/awesome-embedded-rust
+56	/scripts/AboutUsDisplay.aspx?pg=ExecutiveDirectors.htm	About Us - Reserve Bank of India	About Us - Reserve Bank of India
+56	/scripts/AboutUsDisplay.aspx?pg=MediaKit.htm	About Us - Reserve Bank of India	About Us - Reserve Bank of India
+56	/scripts/OccasionalPublications.aspx?head=RBI%27s%20Functions%20and%20Working	RBI's Functions and Working | Official Website of Reserve Bank of India	Occasional Publication - Reserve Bank of India
+56	/scripts/AboutUsDisplay.aspx?pg=AllPublications.htm	About Us - Reserve Bank of India	About Us - Reserve Bank of India
+56	/scripts/AboutUsDisplay.aspx?pg=Depts.htm	About Us - Reserve Bank of India	About Us - Reserve Bank of India
+56	/scripts/rbsc.aspx	RBSC | Official Website of Reserve Bank of India	RBSC - Reserve Bank of India
+56	/scripts/AboutUsDisplay.aspx?pg=deputygovernors.htm	About Us - Reserve Bank of India	About Us - Reserve Bank of India
+1149	/reqwest/	reqwest - Rust	reqwest
+57	/about-this-guide.html	About this guide - Rust Compiler Development Guide	A guide to developing the Rust compiler (rustc)
+59	/u/ltoscano	Profile - ltoscano - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+58	/about/	About - Rust Contributors	About - Rust Contributors Thanks is a place for us to give thanks to everyone who contributes to the Rust project . Currently, we are only tracking commits and reviews to rust-lang
+1156	/	Rust Internals	Discussions around the design and implementation of The Rust Programming Language
+979	/	Vimeo - All-in-One Video Platform	The video platform trusted by 287 million creatives, entrepreneurs, and businesses. Everything you need to create, manage, and share stunning videos.
+59	/u/miro	Profile - miro - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+59	/u/msertdev	Profile - msertdev - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+1157	/book/collections/	Collections - The Embedded Rust Book	Collections - The Embedded Rust Book Keyboard shortcuts Press ← or → to navigate between chapters Press S or / to search in the book Press ? to show this help Press Esc to hide thi
+59	/u/boomshroom	Profile - boomshroom - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+59	/u/willi_kappler	Profile - willi_kappler - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+59	/u/nasa42	Profile - nasa42 - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+59	/u/llogiq	Profile - llogiq - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+1158	/	Rust Programming Language	A language empowering everyone to build reliable and efficient software.
+59	/u/khimru	Profile - khimru - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+59	/u/scottmcm	Profile - scottmcm - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+59	/t/why-does-shifting-right-by-a-negative-amount-not-shift-left/143555	Why does shifting right by a negative amount not shift left? - The Rust Programming Language Forum	I'd expect 1u64 >> -1i32 to return 2, moving right by a negative distance is just moving left, but instead it panics. Playground: Rust Playground
+59	/c/community/8	community - The Rust Programming Language Forum	This category is a place to talk about anything related to Rust community organization. You can use this to ask questions, organize or discuss events, or anything that's not necess
+1157	/discovery/	Choose Your Discovery	Choose Your Discovery Keyboard shortcuts Press ← or → to navigate between chapters Press S or / to search in the book Press ? to show this help Press Esc to hide this help Auto Lig
+1157	/	Rust Embedded	Rust Embedded Please visit rust-embedded.org .
+1157	/embedonomicon/	Preface - The Embedonomicon	Preface - The Embedonomicon Keyboard shortcuts Press ← or → to navigate between chapters Press S or / to search in the book Press ? to show this help Press Esc to hide this help Au
+1157	/book/	Introduction - The Embedded Rust Book	Introduction - The Embedded Rust Book Keyboard shortcuts Press ← or → to navigate between chapters Press S or / to search in the book Press ? to show this help Press Esc to hide th
+1157	/book/interoperability/	Interoperability - The Embedded Rust Book	Interoperability - The Embedded Rust Book Keyboard shortcuts Press ← or → to navigate between chapters Press S or / to search in the book Press ? to show this help Press Esc to hid
+1157	/book/concurrency/	Concurrency - The Embedded Rust Book	Concurrency - The Embedded Rust Book Keyboard shortcuts Press ← or → to navigate between chapters Press S or / to search in the book Press ? to show this help Press Esc to hide thi
+1157	/book/portability/	Portability - The Embedded Rust Book	Portability - The Embedded Rust Book Keyboard shortcuts Press ← or → to navigate between chapters Press S or / to search in the book Press ? to show this help Press Esc to hide thi
+1157	/book/static-guarantees/	Static Guarantees - The Embedded Rust Book	Static Guarantees - The Embedded Rust Book Keyboard shortcuts Press ← or → to navigate between chapters Press S or / to search in the book Press ? to show this help Press Esc to hi
+1159	/namespace/rust-lang	Open VSX Registry	Open VSX Registry
+59	/t/crate-of-the-week/2704	Crate of the Week - community - The Rust Programming Language Forum	In RFC : Try-Catch Blocks, someone expressed concern over the discoverability of crates. To improve this situation, I suggested to have a "Crate of the Week" similar to TWIR's "Quo
+59	/u/kenneth.morrissette	Profile - kenneth.morrissette - The Rust Programming Language Forum	General discussion of The Rust Programming Language
+56	/scripts/AboutUsDisplay.aspx?pg=OrganizationStructure.htm	About Us - Reserve Bank of India	About Us - Reserve Bank of India
+1160	/	About this Guide - Standard library developers Guide	Guide for standard library developers
+59	/t/streaming-json-library-struson-version-0-8-0-released/143640	Streaming JSON library ‘Struson’ version 0.8.0 released - announcements - The Rust Programming Language Forum	I have just released version 0.8.0 of my streaming JSON library 'Struson'. Struson streams JSON data using Read and Write without having to hold the complete data in memory, and pr
+59	/t/is-there-a-tool-for-automatically-transpossing-my-module-structure/143584	Is there a tool for automatically transpossing my module structure? - The Rust Programming Language Forum	For some reason I got used to the foo/mod.rs way of structuring modules instead of foo.rs besides foo/, is there a tool for automatically doing all the file renaming needed to swit
+1161	/version/1/3/0/	https://www.contributor-covenant.org/version/1/3/0/code-of-conduct/	https://www.contributor-covenant.org/version/1/3/0/code-of-conduct/
+979	/cambridgeconsultants	Cambridge Consultants	We do deep tech, you create the future… we are Cambridge Consultants. We do extraordinary, new-to-the-world deep tech innovation. What is deep tech? It’s a mindset;…
+1162	/	Rocket - Simple, Fast, Type-Safe Web Framework for Rust	Rocket is a web framework for the Rust programming language that makes it simple to write fast web applications without sacrificing flexibility or type safety.
+60	/print.html	Rust Forge	Supplemental documentation for contributing to The Rust Programming Language
+58	/crates.io	All-time crates.io Contributors	All-time crates.io Contributors Back to all projects We have had 433 individuals contribute to crates.io so far. Thank you so much! Rank Name Contributions 1 Tobias Bieniek 9680 2 
+1163	/	WebAssembly	WebAssembly WebAssembly (abbreviated Wasm ) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming lang
+1149	/web-sys/latest/web_sys/	web_sys - Rust	Raw API bindings for Web APIs
+1164	/publishers/rust-lang	Publisher The Rust Programming Language - Visual Studio Marketplace	Publisher rust-lang, The Rust Programming Language - Visual Studio Marketplace. Empowering everyone to build reliable and efficient software.
+58	/rustup	Rustup Contributors	Rustup Contributors Rustup is a community project and is very thankful for the many community contributions it receives. See this page for more information . All time 540 people 62
+1165	/wiki/mailing-lists/distros	mailing-lists:distros [OSS-Security]	mailing-lists:distros [OSS-Security] [[ mailing-lists:distros ]] OSS-Security Trace: • distros Table of Contents Operating system distribution security contact lists Operating syst
+1166	/organizations/managing-organization-settings/verifying-or-approving-a-domain-for-your-organization	Verifying or approving a domain for your organization - GitHub Docs	You can verify your ownership of domains with GitHub to confirm your organization's identity.
+56	/scripts/CommunicationPolicy.aspx	Communication Policy of RBI | Official Website of Reserve Bank of India	Communication Policy of RBI - Reserve Bank of India
+56	/scripts/Regionaloffices.aspx	Regional Offices | Official Website of Reserve Bank of India	Regional Offices - Reserve Bank of India
+1167	/docs/book	Introduction - Rust and WebAssembly	Introduction - Rust and WebAssembly Light (default) Rust Coal Navy Ayu Rust and WebAssembly Rust 🦀 and WebAssembly 🕸 This small book describes how to use Rust and WebAssembly toget
+1168	/	rustup.rs - The Rust toolchain installer	The Rust toolchain installer
+1169	/licenses/by/3.0/	Deed - Attribution 3.0 Unported - Creative Commons	Deed - Attribution 3.0 Unported - Creative Commons Skip to content Languages available aragonés Azərbaycanca Bahasa Indonesia Basque català dansk Deutsch eesti English español Espe
+58	/all-time.html	All-time upstream Rust Contributors	All-time upstream Rust Contributors Back to all projects We have had 11378 individuals contribute to the Rust toolchain so far. Thank you so much! Rank Name Contributions 1 bors 59
+58	/docs.rs	All-time Docs.rs Contributors	All-time Docs.rs Contributors Back to all projects We have had 157 individuals contribute to Docs.rs so far. Thank you so much! Rank Name Contributions 1 Denis Cornehl 1249 2 Joshu
+58	/rust	Rust Contributors	Rust Contributors Rust is a community project and is very thankful for the many community contributions it receives. See this page for more information . All time 10863 people 4669
+44	/rust-lang/rust-forge	GitHub - rust-lang/rust-forge: Information useful to people contributing to Rust · GitHub	Information useful to people contributing to Rust. Contribute to rust-lang/rust-forge development by creating an account on GitHub.
+44	/orgs/rust-lang/followers	GitHub · Where software is built	GitHub is where people build software. More than 225 million people use GitHub to discover, fork, and contribute to over 800 million projects.
+1170	/	rfcbot	rfcbot rfcbot pending proposals T-bootstrap merge: sanitizers: Stabilize AddressSanitizer and LeakSanitizer (rust-lang/rust#123617) no pending checkboxes stabilization-scope (by we
+1171	/	Self-Hosted AI Inference and Linkerd Service Mesh | Buoyant	Self-hosted AI inference and enterprise service mesh for Kubernetes, from the creators of Linkerd. Run models and services on infrastructure you control.
+18	/ISRO_Transfers_IMS1SatelliteBus.html	ISRO Transfers IMS-1 Satellite Bus Technology to a Private Industry	ISRO successfully transfers IMS-1 satellite bus technology to private industry partners.
+18	/LVM3_M3_OneWeb_India2_mission_successful.html	LVM3 M3/OneWeb India-2 mission accomplished successfully	ISRO successfully completes the LVM3-M3 OneWeb India-2 mission deploying 36 satellites.
+1172	/post/30036893703/policy-on-trolling	Policy on Trolling	Writing and Stuff from Isaac Z. Schlueter
+18	/SDSCRecruitment26.html	Recruitment to the post of Technical Assistant, Scientific Assistant, Library Assistant ‘A’, Nurse ‘B’, Technician ‘B’/ 	Recruitment to the post of Technical Assistant, Scientific Assistant, Library Assistant ‘A’, Nurse ‘B’, Technician ‘B’/ Draughtsman ‘B’, Fireman ‘A’, LVD ‘A’ & HVD ‘A’, Multi-Taski
+18	/ICRB_Recruitment13.html	Recruitment to the post of Scientist/Engineers 'SC'	Latest job vacancies, selection notices, and application portals managed by the ISRO Central Recruitment Board.
+18	/Ax-04_MissionUpdates_13062025.html	Ax-04 Mission Updates	Mission updates for the Axiom-4 (Ax-04) human spaceflight mission involving Indian Gaganyatri.
+18	/Progress_Axiom-4_mission_tentative_schedule_undocking_ISS_to_earth.html	Progress of Axiom-4 mission and tentative schedule for undocking from ISS to return journey to earth	Progress of Axiom-4 mission and tentative schedule for undocking from ISS to return journey to earth
+18	/Fellowships.html	Fellowships	Research fellowships, doctoral grants, and postdoctoral opportunities sponsored by the Department of Space.
+18	/ISTRACRecruitment4.html	Recruitment to the posts of Technician 'B', Draughtsman 'B', Technical Assistant, Scientific Assistant, Library Assistan	Recruitment to the posts of Technician 'B', Draughtsman 'B', Technical Assistant, Scientific Assistant, Library Assistant 'A' and Cook 'A'
+18	/ICRB_Recruitment11.html	Recruitment to the post of Assistants, Junior Personal Assistants, Upper Division Clerk and Stenographers	Recruitment to the post of Assistants, Junior Personal Assistants, Upper Division Clerk and Stenographers
+18	/UnionCabinetapprovesestablishment_INSPACe.html	Union Cabinet approves establishment of Rs.1,000 crore Venture Capital Fund for Space Sector under aegis of IN-SPACe	Union Cabinet approves the creation of IN-SPACe to encourage private sector participation in space.
+18	/IIST_12th_convocation.html	12<sup>th</sup> Convocation of Indian Institute of Space Science and Technology	Highlights and convocation address from the 12th graduation ceremony of the Indian Institute of Space Science and Technology.
+18	/ICRB_Recruitment9.html	Recruitment to the post of Scientist/Engineer 'SC' in the disciplines of Electronics, Mechanical and Computer Science	Recruitment to the post of Scientist/Engineer 'SC' in the disciplines of Electronics, Mechanical and Computer Science
+18	/DOSRecruitment10.html	Application for the posts of Group-A and Group-B	Final selection lists and appointment notices for Department of Space recruitment drives.
+18	/ISRO_ESA_GaganyaanMissions.html	ISRO - ESA Signs Technical Implementing Plan for Network Operation Support for Gaganyaan Missions	Collaborative technical discussions between ISRO and ESA supporting human spaceflight safety.
+18	/LPSCRecruitment14.html	Recruitment to the post of Scientist / Engineer 'SC'	Career opportunities and recruitment updates issued by the Liquid Propulsion Systems Centre.
+18	/DOSRecruitment11.html	Application for the post of Accounts Officer (Finance)	Final selection lists and appointment notices for Department of Space recruitment drives.
+18	/LiveRegistration.html	Live registration of PhD holders	Online registration portal for witnessing live rocket launches from SDSC SHAR galleries.
+18	/YUVIKA.html	YUVIKA	YUVIKA (Yuva Vigyani Karyakram) central portal providing program guidelines, registration, and FAQs.
+18	/SACRecruitment21.html	Recruitment to the posts of Junior Research Fellows, Research Associate and Project Scientist-I	Recruitment to the posts of Junior Research Fellows, Research Associate and Project Scientist-I
+18	/URSCRecruitment13.html	Recruitment to the posts of Technician - B/ Heavy Vehicle Driver - A/ Light Vehicle Driver - A/ Staff Car Driver- A	Shortlisted candidate lists, interview schedules, and exam results published by URSC.
+18	/Mission_GSLVF18_Lift_Off_Video.html	Mission GSLV-F18/NVS-03 - Lift-off & Onboard Camera Video	Mission GSLV-F18/NVS-03 - Lift-off & Onboard Camera Video
+18	/ISRO_ESA_Agreement_for_Cooperation.html	ISRO-ESA Agreement for Cooperation on Activities related to Astronaut Training, Mission Implementation and Research Expe	ISRO-ESA Agreement for Cooperation on Activities related to Astronaut Training, Mission Implementation and Research Experiments
+18	/pressRelease_NavIC_L1.html	NavIC L1 support in upcoming Mobile, Automotive and IoT Platforms through Qualcomm Technologies	Press release announcing the introduction of NavIC L1 frequency signal support for commercial receivers.
+18	/ISRO-ESA_collaboration_in_microgravity_research_in_upcoming_Axiom-4_Mission.html	ISRO-ESA collaboration in microgravity research in upcoming Axiom-4 Mission	ISRO and ESA collaborate on microgravity scientific experiments during the Axiom-4 mission.
+18	/FAQsonCareers.html	FAQs on careers	Frequently asked questions on scientist recruitment, eligibility, and selection tests at ISRO.
+18	/Successful_accomplishment_SMPS_Gaganyaan.html	Successful accomplishment of Development of Service Module Propulsion System technology for Gaganyaan Missions	Successful accomplishment of Development of Service Module Propulsion System technology for Gaganyaan Missions
+18	/Mission_GSLVF18_gallery.html	GSLV-F18/NVS-03 Gallery	Launch photo gallery for the GSLV-F18/NVS-03 Mission
+18	/Microgravity_Research_Experiments.html	Update on Microgravity Research Experiments onboard the International Space Station	Overview of microgravity research payloads and scientific experiments conducted on orbital platforms.
+18	/OldQuestionPapers.html	Old question papers	Archived recruitment test papers and syllabus guides for ISRO job aspirants.
+18	/NESACRecruitment24.html	Recruitment to the posts of Director	Recruitment archives and historical vacancy notices for NESAC.
+18	/ISRO_Space_Medicine.html	Indian Space Research Organisation (ISRO), Department of Space (DoS) and Sree Chitra Tirunal Institute for Medical Scien	Overview of ISRO's space medicine research division supporting astronaut health for Gaganyaan.

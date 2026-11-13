@@ -1,0 +1,100 @@
+55	/2024/09/04/cve-2024-43402/	Security advisory for the standard library (CVE-2024-43402) | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2024/05/17/enabling-rust-lld-on-linux/	Faster linking times on nightly on Linux using `rust-lld` | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2024/11/06/trademark-update/	Next Steps on the Rust Trademark Policy | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2024/12/16/project-goals-nov-update/	November project goals update | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/03/03/Rust-participates-in-GSoC-2025/	Rust participates in Google Summer of Code 2025 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/04/03/Rust-1.86.0/	Announcing Rust 1.86.0 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2024/03/11/Rustup-1.27.0/	Announcing Rustup 1.27.0 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/03/03/Project-Goals-Feb-Update/	February Project Goals Update | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2023/10/27/crates-io-non-canonical-downloads/	crates.io: Dropping support for non-canonical downloads | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2024/02/08/Rust-1.76.0/	Announcing Rust 1.76.0 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2024/12/05/annual-survey-2024-launch/	Launching the 2024 State of Rust Survey | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/09/03/welcoming-the-rust-innovation-lab/	Welcoming the Rust Innovation Lab | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/07/11/crates-io-development-update-2025-07/	crates.io: development update | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/06/20/may-project-goals-update/	May Project Goals Update | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/12/05/crates.io-malicious-crates-finch-rust-and-sha-rust/	crates.io: Malicious crates finch-rust and sha-rust | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/10/15/announcing-the-new-rust-project-directors-2025/	Announcing the New Rust Project Directors | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/10/28/project-goals-2025h2/	Project goals for 2025H2 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/07/03/stabilizing-naked-functions/	Stabilizing naked functions | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/06/16/rust-compiler-performance-survey-2025/	Rust compiler performance survey 2025 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/09/01/rust-lld-on-1.90.0-stable/	Faster linking times with 1.90.0 stable on Linux using the LLD linker | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/11/10/Rust-1.91.1/	Announcing Rust 1.91.1 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/12/05/Updating-musl-1.2.5/	Updating Rust's Linux musl targets to 1.2.5 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/12/11/Rust-1.92.0/	Announcing Rust 1.92.0 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/05/15/Rust-1.87.0/	Announcing Rust 1.87.0 and ten years of Rust! | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/05/08/gsoc-2025-selected-projects/	Announcing Google Summer of Code 2025 selected projects | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/08/19/demoting-x86-64-apple-darwin-to-tier-2-with-host-tools/	Demoting x86_64-apple-darwin to Tier 2 with host tools | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/11/18/gsoc-2025-results/	Google Summer of Code 2025 results | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/05/26/demoting-i686-pc-windows-gnu/	Demoting i686-pc-windows-gnu to Tier 2 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/05/26/april-project-goals-update/	April Project Goals Update | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/11/19/Project-Goals-2025-September-Update/	Project goals update — September 2025 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/09/12/crates-io-phishing-campaign/	crates.io phishing campaign | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/12/03/crates.io-malicious-crates-evm-units-and-uniswap-utils/	crates.io: Malicious crates evm-units and uniswap-utils | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/11/19/project-goals-update-october-2025/	Project goals update — October 2025 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/11/20/switching-to-v0-mangling-on-nightly/	Switching to Rust's own mangling scheme on nightly | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/10/30/Rust-1.91.0/	Announcing Rust 1.91.0 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/09/18/Rust-1.90.0/	Announcing Rust 1.90.0 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/08/07/Rust-1.89.0/	Announcing Rust 1.89.0 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/09/24/crates.io-malicious-crates-fasterlog-and-asyncprintln/	crates.io: Malicious crates faster_log and async_println | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/06/26/Rust-1.88.0/	Announcing Rust 1.88.0 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/11/25/interview-with-jan-david-nose/	Interview with Jan David Nose | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/12/03/lessons-learned-from-the-rust-vision-doc-process/	Lessons learned from the Rust Vision Doc process | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/11/17/launching-the-2025-state-of-rust-survey/	Launching the 2025 State of Rust Survey | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/09/10/rust-compiler-performance-survey-2025-results/	Rust compiler performance survey 2025 results | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/10/16/docsrs-changed-default-targets/	docs.rs: changed default targets | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/08/05/july-project-goals-update/	Project goals update — July 2025 | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/2025/12/08/making-it-easier-to-sponsor-rust-contributors/	Making it easier to sponsor Rust contributors | Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/03/19/terminating-rust/	Resolving Rust's forward progress guarantees | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/11/13/goverance-wg-cfp/	Governance WG Call For Participation | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/11/14/evaluating-github-actions/	Evaluating GitHub Actions | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/03/governance-wg-meeting/	Governance Working Group Update | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/20/infra-team-meeting/	2019-12-17 Infrastructure Team Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/23/formatting-the-compiler/	Formatting the compiler tree | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/03/13/rename-rustc-guide/	The rustc-guide is now rustc-dev-guide | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/04/ide-future/	2019-11-18 IDE team meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/03/17/governance-wg/	Governance Working Group Update: Meeting 12 March 2020 | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/10/governance-wg-meeting/	Governance Working Group Update | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/02/25/intro-rustc-self-profile/	Intro to rustc's self profiler | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/01/14/Goverance-wg-cfp/	Governance Working Group Update: Meeting 14 January 2020 | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/30/compiler-team-meeting/	2019-10-24 Compiler Team Triage Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/29/infra-team-meeting/	2019-10-29 Infrastructure Team Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/15/infra-team-meeting/	2019-10-10 Infrastructure Team Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/24/pnkfelix-compiler-team-co-lead/	Please welcome pnkfelix as compiler team co-lead! | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/20/wg-learning-update/	An Update from WG-Learning | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/22/infra-team-meeting/	2019-10-22 Infrastructure Team Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/19/jasper-and-wiser-full-members-of-compiler-team/	Congrats to compiler team members matthewjasper and wesleywiser | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/03/13/upcoming-compiler-team-design-meetings/	Upcoming compiler-team design meetings | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/01/23/Introducing-cargo-audit-fix-and-more/	cargo-audit v0.11: Introducing the `fix` feature, yanked crate detection, and more | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/02/20/jtgeibel-crates-io-co-lead/	Please welcome jtgeibel as crates.io team co-lead! | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/11/18/infra-team-meeting/	2019-11-12 Infrastructure Team Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/03/13/twir-new-lead/	This Week in Rust is looking for a new maintainer. | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/20/governance-wg-meeting/	Governance Working Group Update: Meeting 17 December 2019 | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/02/const-prop-on-by-default/	Constant propagation is now on by default in nightly | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/02/07/compiler-team-meeting/	2020-02-06 Compiler Team Triage Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/18/bisecting-rust-compiler/	Bisecting Rust Compiler Regressions with cargo-bisect-rustc | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/11/11/compiler-team-meeting/	2019-11-07 Compiler Team Triage Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/12/09/announcing-the-docsrs-team/	Announcing the Docs.rs Team | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/02/26/crates-io-incident-report/	crates.io incident report for 2020-02-20 | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/11/22/upcoming-compiler-team-design-meetings/	Upcoming compiler-team design meetings | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/11/Lang-Team-Meeting/	2019-10-10 Lang Team Triage Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/02/06/Cleanup-Crew-ICE-breakers/	Announcing the Cleanup Crew ICE-breaker group | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/02/27/pietro-joins-core-team/	Pietro Albini has joined the core team | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/03/27/goodbye-docs-team/	Goodbye, docs team | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/03/11/lang-team-design-meetings/	March Lang Team Design Meetings | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/17/ecstatic-morse-for-compiler-contributors/	Please welcome ecstatic-morse to compiler-contributors | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/02/27/ffi-unwind-design-meeting/	Announcing the first FFI-unwind project design meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/03/18/all-hands-retrospective/	All Hands Retrospective | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/02/11/Goverance-wg/	Governance Working Group Update: Meeting 11 February 2020 | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/28/rustc-learning-working-group-introduction/	The Rustc Dev Guide Working Group - An Introduction | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/11/19/compiler-team-meeting/	2019-11-14 Compiler Team Triage Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/11/04/Clippy-removes-plugin-interface/	Clippy is removing its plugin interface | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/03/04/recent-future-pattern-matching-improvements/	Recent and future pattern matching improvements | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/24/docsrs-outage-postmortem/	docs.rs outage postmortem | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/25/planning-meeting-update/	Planning meeting update | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/01/10/lang-team-design-meetings/	Lang Team Design Meetings | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/11/07/compiler-team-meeting/	2019-10-31 Compiler Team Triage Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/15/compiler-team-meeting/	2019-10-10 Compiler Team Triage Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2019/10/21/compiler-team-meeting/	2019-10-17 Compiler Team Triage Meeting | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/02/27/Goverance-wg/	Governance Working Group Update: Meeting 27 February 2020 | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/01/24/feb-lang-team-design-meetings/	February Lang Team Design Meetings | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
+55	/inside-rust/2020/01/24/upcoming-compiler-team-design-meetings/	Upcoming compiler-team design meetings | Inside Rust Blog	Empowering everyone to build reliable and efficient software.
